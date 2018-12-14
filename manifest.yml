@@ -1,8 +1,8 @@
 ---
 applications:
- - name: CreateAll
+ - name: FindId
    random-route: false
-   path: target/CreateAll.war
+   path: target/FindId.war
    memory: 256M
    instances: 1
    buildpack: liberty-for-java

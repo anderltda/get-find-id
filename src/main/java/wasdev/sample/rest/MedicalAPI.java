@@ -16,11 +16,13 @@
 package wasdev.sample.rest;
 
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+
+import com.google.gson.Gson;
 
 import wasdev.sample.store.MedicalStore;
 import wasdev.sample.store.MedicalStoreFactory;
@@ -37,18 +39,17 @@ public class MedicalAPI extends Application {
 	//Our database store
 	MedicalStore store = MedicalStoreFactory.getInstance();
 
-    /**
-     * @return
-     */
-    @POST
-    @Path("/create")
-    @Produces("application/text")
-    @Consumes("application/json")
-    public String newToDo(Medical medical) {
-      if(store == null) {
-    	  return String.format("No found store", medical.getName());
-      }
-      store.persist(medical);
-      return String.format("O Médico %s foi inserido com sucesso.", medical.getName());
-    }
+	/**
+	 * @param _id
+	 * @return
+	 */
+	@POST
+	@Path("/findId")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String findById(String _id) {
+
+		Medical medical = store.get(_id);
+
+		return new Gson().toJson(medical);
+	}
 }
