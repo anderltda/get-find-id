@@ -1,0 +1,8 @@
+---
+applications:
+ - name: CreateAll
+   random-route: true
+   path: target/CreateAll.war
+   memory: 1024M
+   instances: 1
+   buildpack: java_buildpack
