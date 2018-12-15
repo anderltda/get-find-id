@@ -16,6 +16,7 @@
 package wasdev.sample.rest;
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -46,9 +47,10 @@ public class MedicalAPI extends Application {
 	@POST
 	@Path("/findId")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String findById(String _id) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String findById(Medical me) {
 
-		Medical medical = store.get(_id);
+		Medical medical = store.get(me.get_id());
 
 		return new Gson().toJson(medical);
 	}
